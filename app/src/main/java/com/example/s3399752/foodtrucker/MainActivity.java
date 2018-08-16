@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Button> buttons = new ArrayList<>();
         for(int i=0;i<10;i++){
             Button btn = (Button)inflater.inflate(R.layout.buttons,null);
+            btn.setText("Hello" + i);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -35,23 +36,23 @@ public class MainActivity extends AppCompatActivity {
             buttons.add(btn);
 
         }
-        for(int i=0;i<buttons.size();i++){
+        for(int i=0;i<4;i++){
             layout.addView(buttons.get(i));
 
         }
         TextView text1 = (TextView)inflater.inflate(R.layout.texts,null);
 
         text1.setText("Malaysian Delights");
-        //layout.addView(text1);
+        layout.addView(text1);
 
-//        for(int i=buttons.size()/2;i<buttons.size();i++){
-//            layout.addView(buttons.get(i));
-//
-//        }
+        for(int i=5;i<10;i++){
+            layout.addView(buttons.get(i));
+
+        }
 
         TextView text2 = (TextView)inflater.inflate(R.layout.texts,null);
-        text1.setText("Wonder Thai");
-        //layout.addView(text2);
+        text2.setText("Wonder Thai");
+        layout.addView(text2);
 
 
 
