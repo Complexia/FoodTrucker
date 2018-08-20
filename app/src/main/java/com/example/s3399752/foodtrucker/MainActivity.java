@@ -12,16 +12,20 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.s3399752.foodtrucker.utils.FoodStuff;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FoodStuff foodStuff;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+        foodStuff = new FoodStuff(this);
+        foodStuff.loadFile();
         LinearLayout layout = findViewById(R.id.layoutLinear);
         ArrayList<Button> buttons = new ArrayList<>();
         for(int i=0;i<10;i++){
