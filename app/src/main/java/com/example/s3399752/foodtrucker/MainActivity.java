@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         foodStuff.loadFile();
         LinearLayout layout = findViewById(R.id.layoutLinear);
         ArrayList<Button> buttons = new ArrayList<>();
-        for(int i=0;i<10;i++){
+
+        for(int i=0;i<foodStuff.getTrucks().size();i++){
             Button btn = (Button)inflater.inflate(R.layout.buttons,null);
-            btn.setText("Hello" + i);
+            btn.setText(foodStuff.getTrucks().get(i).getTruckName());
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -40,22 +41,21 @@ public class MainActivity extends AppCompatActivity {
             buttons.add(btn);
 
         }
-        for(int i=0;i<4;i++){
-            layout.addView(buttons.get(i));
-
-        }
         TextView text1 = (TextView)inflater.inflate(R.layout.texts,null);
 
-        text1.setText("Malaysian Delights");
+        text1.setText("All:");
         layout.addView(text1);
 
-        for(int i=5;i<10;i++){
+        for(int i=0;i<buttons.size();i++){
             layout.addView(buttons.get(i));
 
         }
 
+
+
+
         TextView text2 = (TextView)inflater.inflate(R.layout.texts,null);
-        text2.setText("Wonder Thai");
+        text2.setText("Suggested:");
         layout.addView(text2);
 
 

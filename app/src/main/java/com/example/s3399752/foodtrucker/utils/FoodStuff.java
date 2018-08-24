@@ -56,6 +56,7 @@ public class FoodStuff {
     }
 
 
-
-
+    public ArrayList<Truck> getTrucks() {
+        return trucks;
+    }
 }

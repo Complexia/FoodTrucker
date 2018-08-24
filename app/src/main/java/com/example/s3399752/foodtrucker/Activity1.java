@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.s3399752.foodtrucker.utils.FoodStuff;
+
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class Activity1 extends AppCompatActivity {
 
@@ -19,30 +22,16 @@ public class Activity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_1);
 
-        ArrayList<Button> buttons = new ArrayList<Button>();
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for(int i=0;i<30;i++){
-            Button button = (Button)inflater.inflate(R.layout.buttons,null);
-            button.setId(i+1);
-            button.setText("Hello" + (i+1));
-            button.setHeight(200);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(Activity1.this,MainActivity.class
-                    ));
-                }
-            });
-            buttons.add(button);
-        }
+        FoodStuff foodStuff = new FoodStuff(this);
+        foodStuff.loadFile();
 
-        LinearLayout layout = findViewById(R.id.layoutLinear);
-        for(int i=0;i<buttons.size();i++){
-            layout.addView(buttons.get(i));
-            TextView text = (TextView)inflater.inflate(R.layout.texts,null);
-            text.setText("world");
-            layout.addView(text);
-        }
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        TextView name = (TextView)inflater.inflate(R.layout.texts,null);
+        
+
+
+
 
 
 
