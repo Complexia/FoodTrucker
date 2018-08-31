@@ -24,10 +24,19 @@ public class Activity1 extends AppCompatActivity {
 
         FoodStuff foodStuff = new FoodStuff(this);
         foodStuff.loadFile();
+        String truckName = "";
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            truckName = extras.getString("name");
+        }
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout layout = findViewById(R.id.layoutLinear);
 
         TextView name = (TextView)inflater.inflate(R.layout.texts,null);
+        name.setText(truckName);
+        layout.addView(name);
+
         
 
 

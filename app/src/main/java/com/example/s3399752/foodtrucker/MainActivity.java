@@ -31,11 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0;i<foodStuff.getTrucks().size();i++){
             Button btn = (Button)inflater.inflate(R.layout.buttons,null);
+            final String truckName = foodStuff.getTrucks().get(i).getTruckName();
             btn.setText(foodStuff.getTrucks().get(i).getTruckName());
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this,Activity1.class));
+                    Intent intent = new Intent(MainActivity.this, Activity1.class);
+                    intent.putExtra("name",truckName);
+                    startActivity(intent);
                 }
             });
             buttons.add(btn);
