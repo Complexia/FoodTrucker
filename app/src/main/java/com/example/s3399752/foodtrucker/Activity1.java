@@ -34,18 +34,18 @@ public class Activity1 extends AppCompatActivity {
             truckWebsite = extras.getString("website");
         }
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout layout = findViewById(R.id.layoutLinear);
+        LinearLayout layout = findViewById(R.id.layoutLinear2);
 
         TextView name = (TextView)inflater.inflate(R.layout.texts,null);
-        name.setText(truckName);
+        name.setText("Truck: " + truckName);
         layout.addView(name);
 
         TextView classification = (TextView)inflater.inflate(R.layout.texts,null);
-        classification.setText(truckClassification);
+        classification.setText("Category: " + truckClassification);
         layout.addView(classification);
 
         TextView website = (TextView)inflater.inflate(R.layout.texts,null);
-        website.setText(truckWebsite);
+        website.setText("Website: " + truckWebsite);
         layout.addView(website);
         
 
