@@ -49,7 +49,7 @@ public class FoodStuff {
 
         }
 
-        Log.v("myTag",trucks.get(0).getTruckWebsite());
+       // Log.v("myTag",trucks.get(0).getTruckWebsite());
 
 
 

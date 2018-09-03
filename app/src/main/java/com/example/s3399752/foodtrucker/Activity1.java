@@ -25,11 +25,14 @@ public class Activity1 extends AppCompatActivity {
         FoodStuff foodStuff = new FoodStuff(this);
         foodStuff.loadFile();
         String truckName = "";
+        String truckClassification = "";
+        String truckWebsite = "";
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if(extras != null) {
             truckName = extras.getString("name");
+            truckClassification = extras.getString("category");
+            truckWebsite = extras.getString("website");
         }
-
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = findViewById(R.id.layoutLinear);
 
@@ -37,6 +40,13 @@ public class Activity1 extends AppCompatActivity {
         name.setText(truckName);
         layout.addView(name);
 
+        TextView classification = (TextView)inflater.inflate(R.layout.texts,null);
+        classification.setText(truckClassification);
+        layout.addView(classification);
+
+        TextView website = (TextView)inflater.inflate(R.layout.texts,null);
+        website.setText(truckWebsite);
+        layout.addView(website);
         
 
 

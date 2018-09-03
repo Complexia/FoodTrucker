@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -32,12 +33,17 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<foodStuff.getTrucks().size();i++){
             Button btn = (Button)inflater.inflate(R.layout.buttons,null);
             final String truckName = foodStuff.getTrucks().get(i).getTruckName();
+            final String truckClassification = foodStuff.getTrucks().get(i).getTruckClassification();
+            final String truckWebsite = foodStuff.getTrucks().get(i).getTruckWebsite();
             btn.setText(foodStuff.getTrucks().get(i).getTruckName());
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, Activity1.class);
                     intent.putExtra("name",truckName);
+                    intent.putExtra("category", truckClassification);
+
+                    intent.putExtra("website", truckWebsite);
                     startActivity(intent);
                 }
             });
