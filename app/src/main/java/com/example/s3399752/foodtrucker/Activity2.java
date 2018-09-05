@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.s3399752.foodtrucker.utils.FoodStuff;
+import com.example.s3399752.foodtrucker.utils.Truck;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,8 @@ public class Activity2 extends AppCompatActivity {
     private ArrayList<Button> buttons;
     private FoodStuff foodStuff;
     private TextView text2;
+    private ArrayList<Truck> trackingTrucks;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +37,73 @@ public class Activity2 extends AppCompatActivity {
         layout = findViewById(R.id.layoutLinear3);
         text1 = (TextView)inflater.inflate(R.layout.texts,null);
         text1.setText("No trackables at the moment...");
-
+        buttons = new ArrayList<>();
         text2 = (TextView)inflater.inflate(R.layout.texts,null);
         text2.setText("Click on the trucks to begin tracking them...");
 
-        layout.addView(text1);
-
-
-
         addTrackablesButton = (Button)inflater.inflate(R.layout.buttons,null);
         addTrackablesButton.setText("Track some trucks");
+        Bundle extra = getIntent().getExtras();
+        String currentTruck = "";
+        if(extra != null){
+           currentTruck =  extra.getString("currentTruck");
+
+        }
+        Bundle newExtra = getIntent().getBundleExtra("newTrackingTracks");
+        if(newExtra != null){
+            trackingTrucks = (ArrayList<Truck>)newExtra.getSerializable("trackingTracks");
+        }
+        if(trackingTrucks == null){
+            Log.v("AASDDS","HAHAHA");
+        }
+        Bundle extras = getIntent().getBundleExtra("extra");
+        if(extras != null) {
+            trackingTrucks  = (ArrayList<Truck>)extras.getSerializable("trackingTracks");
+            addTrackablesButton.setText("Track more trucks");
+            TextView text3 = (TextView)inflater.inflate(R.layout.texts,null);
+            text3.setText("Your trackables: ");
+            layout.addView(text3);
+
+
+
+
+        }
+        if(trackingTrucks != null){
+            for(int i=0;i<trackingTrucks.size();i++){
+                final Button button = (Button)inflater.inflate(R.layout.buttons,null);
+                button.setText(trackingTrucks.get(i).getTruckName());
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Activity2.this,Activity3.class);
+                        intent.putExtra("truckName",button.getText());
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("trackingTracks",trackingTrucks);
+                        intent.putExtra("bundle",bundle);
+                        startActivity(intent);
+                    }
+                });
+                buttons.add(button);
+                layout.addView(button);
+            }
+        }
+
+        if(trackingTrucks == null){
+            layout.addView(text1);
+        }
+
+
+
+
+
         addTrackablesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Activity2.this,MainActivity.class);
                 intent.putExtra("checker",1);
+                Bundle extra = new Bundle();
+                extra.putSerializable("trackingTrucks",trackingTrucks);
+                intent.putExtra("extra",extra);
                 startActivity(intent);
             }
         });

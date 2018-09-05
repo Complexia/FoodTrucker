@@ -1,9 +1,11 @@
 package com.example.s3399752.foodtrucker.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Truck {
+public class Truck implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String truckName;
     private ArrayList<String> truckCategories = new ArrayList<>();
     private String truckWebsite;

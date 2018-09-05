@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.s3399752.foodtrucker.utils.FoodStuff;
+import com.example.s3399752.foodtrucker.utils.Truck;
 
 import java.util.ArrayList;
 
@@ -33,14 +34,19 @@ public class MainActivity extends AppCompatActivity {
     private TextView text1;
     Button myTrackables;
     private int checker;
-
+    private ArrayList<Truck> trackingTrucks;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        trackingTrucks = new ArrayList<Truck>();
+
+
         foodStuff = new FoodStuff(this);
         foodStuff.loadFile();
         layout = findViewById(R.id.layoutLinear); //without ScrollView
@@ -51,10 +57,20 @@ public class MainActivity extends AppCompatActivity {
 
         checker = 0;
         Bundle extras = getIntent().getExtras();
+        Bundle extra = getIntent().getBundleExtra("extra");
         if(extras != null) {
             checker = extras.getInt("checker");
 
+
+
         }
+        if(extra != null){
+            if((ArrayList<Truck>)extra.getSerializable("trackingTrucks") != null){
+                trackingTrucks = (ArrayList<Truck>)extra.getSerializable("trackingTrucks");
+            }
+
+        }
+
 
 
         for(int i=0;i<foodStuff.getTrucks().size();i++){
@@ -79,10 +95,12 @@ public class MainActivity extends AppCompatActivity {
                     else{
 
 
-                        Intent intent = new Intent(MainActivity.this,Activity2.class);
+
                         for(int j=0;j<buttons.size();j++){
                             if(buttons.get(j).getText().equals(btn1.getText())){
+                                trackingTrucks.add(foodStuff.getTrucks().get(j + (foodStuff.getTrucks().size() - buttons.size())));
                                 buttons.remove(j);
+
                                 break;
                             }
                         }
@@ -94,6 +112,18 @@ public class MainActivity extends AppCompatActivity {
             });
             buttons.add(btn);
 
+        }
+        if(checker == 1 && trackingTrucks != null){
+            for(int i=0;i<buttons.size();i++){
+                for(int j=0;j<trackingTrucks.size();j++){
+                    if(buttons.get(i).getText().equals(trackingTrucks.get(j).getTruckName())){
+                        buttons.remove(i);
+                    }
+                }
+                if(buttons.size() == 0){
+                    break;
+                }
+            }
         }
         text1 = (TextView)inflater.inflate(R.layout.texts,null);
 
@@ -132,6 +162,31 @@ public class MainActivity extends AppCompatActivity {
             });
 
             layout.addView(myTrackables);
+        }
+        else{
+            final Button doneButton = (Button)inflater.inflate(R.layout.buttons,null);
+            doneButton.setText("Done adding trucks");
+            doneButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(trackingTrucks.isEmpty()){
+                        //inform user that he needs to add trucks first
+                    }
+                    else{
+                        Intent intent = new Intent(MainActivity.this,Activity2.class);
+                        Bundle extra = new Bundle();
+                        extra.putSerializable("trackingTracks",trackingTrucks);
+
+                        intent.putExtra("extra",extra);
+
+
+                        startActivity(intent);
+
+
+                    }
+                }
+            });
+            layout.addView(doneButton);
         }
 
 
