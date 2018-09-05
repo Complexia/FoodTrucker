@@ -1,6 +1,7 @@
 package com.example.s3399752.foodtrucker.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -24,23 +25,29 @@ public class LocationStuff {
             String line;
 
             while((line = reader.readLine()) != null){
-                line.replaceAll("\\s","");
+
                 String[] splitLine = line.split(",");
-                String date = splitLine[0].substring(0,9);
-                String time = splitLine[0].substring(10,16);
-                String truckID = splitLine[1];
-                String stoppingTime = splitLine[2];
-                String location = splitLine[3].concat(" " + splitLine[4]);
+                String date = splitLine[0].substring(0,10).trim();
+                String time = splitLine[0].substring(11,18).trim();
+                String truckID = splitLine[1].trim();
+                String stoppingTime = splitLine[2].trim();
+                String location = splitLine[3].concat(" " + splitLine[4]).trim();
+
+
+
 
                 for(int i=0;i<foodStuff.getTrucks().size();i++){
-                    if(foodStuff.getTrucks().get(i).getTruckID().equals(truckID)){
-                        foodStuff.getTrucks().get(i).setDateLocation(date);
-                        foodStuff.getTrucks().get(i).setTimeLocation(date);
-                        foodStuff.getTrucks().get(i).setStoppingTime(Integer.parseInt(stoppingTime));
-                        foodStuff.getTrucks().get(i).setLocationCos(location);
+
+                    if(foodStuff.getTrucks().get(i).getTruckName().equals(foodStuff.getTruckByID(truckID).getTruckName())){
+
+                        LocationPoints locationPoints = new LocationPoints(date,time,location,stoppingTime);
+                        foodStuff.getTrucks().get(i).getLocationPoints().add(locationPoints);
+
                     }
                 }
+                Log.v("ANANA",foodStuff.getTrucks().get(1).getLocationPoints().get(0).getDate());
             }
+
         }
         catch(Exception e){
 

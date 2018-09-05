@@ -39,6 +39,15 @@ public class Activity3 extends AppCompatActivity {
         locationButton = (Button)inflater.inflate(R.layout.buttons,null);
         removeButton = (Button)inflater.inflate(R.layout.buttons,null);
         meetButton.setText("Schedule a meet");
+        meetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Activity3.this,Activity5.class);
+                intent.putExtra("truckName",currentTruck);
+                startActivity(intent);
+            }
+        });
+
         locationButton.setText("Current location");
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override

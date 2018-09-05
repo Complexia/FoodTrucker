@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.s3399752.foodtrucker.utils.Factory;
 import com.example.s3399752.foodtrucker.utils.FoodStuff;
 import com.example.s3399752.foodtrucker.utils.Truck;
 
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                         extra.putSerializable("trackingTracks",trackingTrucks);
 
                         intent.putExtra("extra",extra);
-
+                        Factory.setTrackingTrucks(trackingTrucks);
 
                         startActivity(intent);
 

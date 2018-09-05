@@ -11,7 +11,7 @@ public class Truck implements Serializable {
     private ArrayList<String> truckCategories = new ArrayList<>();
     private String truckWebsite;
     private String truckClassification;
-
+    private ArrayList<LocationPoints> locationPoints;
 
 
     private String dateLocation;
@@ -33,7 +33,7 @@ public class Truck implements Serializable {
     }
 
     public Truck(){
-
+        locationPoints = new ArrayList<>();
     }
 
     public String getTruckName() {
@@ -105,6 +105,9 @@ public class Truck implements Serializable {
 
     public void setLocationCos(String locationCos) {
         this.locationCos = locationCos;
+    }
+    public ArrayList<LocationPoints> getLocationPoints(){
+        return locationPoints ;
     }
 
 

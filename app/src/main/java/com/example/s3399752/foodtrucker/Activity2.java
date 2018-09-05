@@ -26,6 +26,7 @@ public class Activity2 extends AppCompatActivity {
     private FoodStuff foodStuff;
     private TextView text2;
     private ArrayList<Truck> trackingTrucks;
+    private Button myMeetups;
 
 
     @Override
@@ -60,6 +61,16 @@ public class Activity2 extends AppCompatActivity {
         if(extras != null) {
             trackingTrucks  = (ArrayList<Truck>)extras.getSerializable("trackingTracks");
             addTrackablesButton.setText("Track more trucks");
+            myMeetups = (Button)inflater.inflate(R.layout.buttons,null);
+            myMeetups.setText("My scheduled meetups");
+            myMeetups.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Activity2.this,Activity6.class);
+                    startActivity(intent);
+                }
+            });
+            layout.addView(myMeetups);
             TextView text3 = (TextView)inflater.inflate(R.layout.texts,null);
             text3.setText("Your trackables: ");
             layout.addView(text3);
