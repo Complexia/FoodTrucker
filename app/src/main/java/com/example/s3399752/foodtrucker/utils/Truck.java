@@ -6,12 +6,26 @@ import java.util.ArrayList;
 public class Truck implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private String truckID;
     private String truckName;
     private ArrayList<String> truckCategories = new ArrayList<>();
     private String truckWebsite;
     private String truckClassification;
 
-    public Truck(String truckName, ArrayList truckCategories, String truckWebsite, String truckClassification) {
+
+
+    private String dateLocation;
+    private String locationCos;
+
+
+    private String timeLocation;
+
+
+
+    private int stoppingTime;
+
+    public Truck(String truckID, String truckName, ArrayList truckCategories, String truckWebsite, String truckClassification) {
+        this.truckID = truckID;
         this.truckName = truckName;
         this.truckCategories = truckCategories;
         this.truckWebsite = truckWebsite;
@@ -53,4 +67,45 @@ public class Truck implements Serializable {
     public void setTruckClassification(String truckClassification) {
         this.truckClassification = truckClassification;
     }
+
+    public String getTruckID(){
+        return truckID;
+    }
+    public void setTruckID(String truckID){
+        this.truckID = truckID;
+    }
+
+    public int getStoppingTime() {
+        return stoppingTime;
+    }
+
+    public void setStoppingTime(int stoppingTime) {
+        this.stoppingTime = stoppingTime;
+    }
+
+    public String getDateLocation() {
+        return dateLocation;
+    }
+
+    public void setDateLocation(String dateLocation) {
+        this.dateLocation = dateLocation;
+    }
+
+    public String getTimeLocation() {
+        return timeLocation;
+    }
+
+    public void setTimeLocation(String timeLocation) {
+        this.timeLocation = timeLocation;
+    }
+
+    public String getLocationCos() {
+        return locationCos;
+    }
+
+    public void setLocationCos(String locationCos) {
+        this.locationCos = locationCos;
+    }
+
+
 }

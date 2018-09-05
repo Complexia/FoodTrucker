@@ -29,6 +29,7 @@ public class FoodStuff {
             while((line = reader.readLine()) != null){
                 String[] splitLine = line.split(",");
                 truck = new Truck();
+                truck.setTruckID(splitLine[0]);
                 truck.setTruckName(splitLine[1]);
                 for(int i = 2;i<splitLine.length;i++){
                     if(!(splitLine[i].contains("/"))){
@@ -58,5 +59,15 @@ public class FoodStuff {
 
     public ArrayList<Truck> getTrucks() {
         return trucks;
+    }
+
+    public Truck getTruckByID(String truckID){
+        Truck returnValue = new Truck();
+        for(int i=0;i<trucks.size();i++){
+            if(trucks.get(i).getTruckID().equals(truckID)){
+                returnValue = trucks.get(i);
+            }
+        }
+        return returnValue;
     }
 }

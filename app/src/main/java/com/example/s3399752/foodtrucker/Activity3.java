@@ -40,6 +40,14 @@ public class Activity3 extends AppCompatActivity {
         removeButton = (Button)inflater.inflate(R.layout.buttons,null);
         meetButton.setText("Schedule a meet");
         locationButton.setText("Current location");
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Activity3.this,Activity4.class);
+                intent.putExtra("truckName",currentTruck);
+                startActivity(intent);
+            }
+        });
         removeButton.setText("Stop tracking truck");
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +64,9 @@ public class Activity3 extends AppCompatActivity {
 
                     }
                 }
+                //Bundle bundle1 = new Bundle();
                 bundle.putSerializable("trackingTracks",trackingTrucks);
-                intent.putExtra("newTrackingTracks",trackingTrucks);
+                intent.putExtra("newTrackingTracks",bundle);
 
                 startActivity(intent);
 
